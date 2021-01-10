@@ -1,23 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 
 <head>
-  <link rel="stylesheet" href="css/popup.css" />
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- CSS -->
+  <link href="css/popup.css" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="thirdParty/form-validation.css" rel="stylesheet">
   <link href="thirdParty/bootstrap.min-5.0.0.css" rel="stylesheet">
-  <title>104 Shareable Filter</title>
+  <title>104 Company Notes</title>
 </head>
 
 <body>
-  <h1>Example heading <span class="badge bg-secondary">New</span></h1>
-  <h2>Example heading <span class="badge bg-secondary">New</span></h2>
-  <h3>Example heading <span class="badge bg-secondary">New</span></h3>
-  <h4>Example heading <span class="badge bg-secondary">New</span></h4>
-  <h5>Example heading <span class="badge bg-secondary">New</span></h5>
-  <h6>Example heading <span class="badge bg-secondary">New</span></h6>
-  <script src="thirdParty/jquery.min-3.5.1"></script>
+  <div class="container">
+    <main>
+      <form class="needs-validation" novalidate="" id="addOrUpdateNote">
+        <div class="row g-3 py-2">
+          <div class="col-12">
+            <label for="companyName" class="form-label">公司名稱</label>
+            <input type="text" class="form-control" id="companyName" placeholder="在公司頁面自動載入" value="" required="">
+            <div class="invalid-feedback">
+              必填，若要新增／修改請到公司頁面。
+            </div>
+          </div>
+          <div class="col-12">
+            <label for="companyURL" class="form-label">公司頁面網址</label>
+            <input type="text" class="form-control" id="companyURL" placeholder="在公司頁面自動載入" value="" required="">
+            <div class="invalid-feedback">
+              必填，若要新增／修改請到公司頁面。
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="note" class="form-label">筆記</label>
+            <textarea class="form-control" id="note" rows="5" maxlength="200" placeholder="最多200字元"></textarea>
+          </div>
+          <!-- Star Rating -->
+          <div class="col-12">
+            <label class="form-label">Rating</label>
+            <div class="company-notes-rating">
+              <input type="radio" class="form-check-input" name="star" value="1" id="star1" required><label
+                for="star1"></label>
+              <input type="radio" class="form-check-input" name="star" value="2" id="star2"><label for="star2"></label>
+              <input type="radio" class="form-check-input" name="star" value="3" id="star3"><label for="star3"></label>
+              <input type="radio" class="form-check-input" name="star" value="4" id="star4"><label for="star4"></label>
+              <input type="radio" class="form-check-input" name="star" value="5" id="star5"><label for="star5"></label>
+            </div>
+            <div id="invalid-feedback-rating">
+              請選擇評價。
+            </div>
+          </div>
+          <!-- End of Star Rating -->
+          <div class="col-12">
+            <button class="w-100 btn btn-primary btn-lg" type="submit">送出新增／修改</button>
+          </div>
+        </div>
+      </form>
+    </main>
+  </div>
+  <!-- JS -->
+  <script src="thirdParty/jquery.min-3.5.1.js"></script>
   <script src="thirdParty/popper.min-2.5.4.js"></script>
   <script src="thirdParty/bootstrap.min-5.0.0.js"></script>
-
+  <script src="thirdParty/form-validation.js"></script>
+  <script src="popup.js"></script>
 </body>
 
 </html>

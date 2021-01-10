@@ -1,8 +1,29 @@
+.company-note-1-star {
+    background-color: #000000;
+}
+
+.company-note-2-star {
+    background-color: #777777;
+}
+
+.company-note-3-star {
+    border: 2px black solid;
+    background-color: #ffffff;
+}
+
+.company-note-4-star {
+    background-color: #ffe59f;
+}
+
+.company-note-5-star {
+    background-color: #ffcc33;
+}
+
 /* Test company name selectors on 
 https://www.104.com.tw/jobs/search/*
 https://www.104.com.tw/job/*
 https://www.104.com.tw/company/*
 */
-a[title^=公司名], a[data-gtm-head=公司名稱], .h1 {
+/* a[title^=公司名], a[data-gtm-head=公司名稱], .h1 {
     background-color: black;
-}
+} *
