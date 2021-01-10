@@ -1,0 +1,1 @@
+chrome.runtime.sendMessage({ todo: "showPageAction" }); // send msg to eventPage.js

@@ -1,0 +1,55 @@
+{
+    "manifest_version": 2,
+    "name": "104 Company Notes",
+    "version": "1.0",
+    "description": "A chrome extension that allows you to freely share a list of your personal reviews of companies on 104 Human Resources Bank, and it also changes the search results page based on your reviews.",
+    "author": "Y.H. Kuo (Sakieye)",
+    "icons": {
+        "16": "images/104-company-notes16.png",
+        "32": "images/104-company-notes32.png",
+        "48": "images/104-company-notes48.png",
+        "128": "images/104-company-notes128.png"
+    },
+    "page_action": {
+        "default_title": "104 Shareable Filter",
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "images/104-company-notes16.png",
+            "32": "images/104-company-notes32.png",
+            "48": "images/104-company-notes48.png",
+            "128": "images/104-company-notes128.png"
+        }
+    },
+    "background": {
+        "scripts": [
+            "eventPage.js"
+        ],
+        "persistent": false
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.104.com.tw/jobs/search/*",
+                "https://www.104.com.tw/company/*",
+                "https://www.104.com.tw/job/*"
+            ],
+            "exclude_matches": [],
+            "js": [
+                "content.js",
+                "thirdParty/jquery.min-3.5.1.js"
+            ],
+            "css": [
+                "css/content.css"
+            ]
+        }
+    ],
+    "permissions": [
+        "tabs",
+        "storage",
+        "declarativeContent",
+        "https://www.104.com.tw/jobs/search/*",
+        "https://www.104.com.tw/company/*",
+        "https://www.104.com.tw/job/*"
+    ],
+    "options_page": "options.html"
+}

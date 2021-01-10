@@ -1,0 +1,8 @@
+/* Test company name selectors on 
+https://www.104.com.tw/jobs/search/*
+https://www.104.com.tw/job/*
+https://www.104.com.tw/company/*
+*/
+a[title^=公司名], a[data-gtm-head=公司名稱], .h1 {
+    background-color: black;
+}
