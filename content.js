@@ -1,12 +1,10 @@
-chrome.runtime.sendMessage({ todo: "showPageAction" }); // send msg to eventPage.js
-
-// getCompanyInfoInCompayPage
+// get company note in company or job page
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.todo === 'getCompanyInfoInCompayPage') {
-        let companyName = $('.h1:first').text().trim();
-        chrome.storage.local.get(companyName, companyInfo => {
-            if (companyInfo[companyName] != undefined) {
-                sendResponse(companyInfo);
+    if (request.todo === 'getCompanyInfo') {
+        let companyName = $(request.selector).text().trim();
+        chrome.storage.local.get(companyName, res => {
+            if (res[companyName] != undefined) {
+                sendResponse(res);
             } else {
                 sendResponse({ [companyName]: {} });
             }
@@ -24,34 +22,28 @@ $(document).ready(() => {
     const companyPageRegex104 = new RegExp('https://www.104.com.tw/company/', 'i');
 
     if (url.match(searchPageRegex104) != null) {
-        let companySelector = 'a[title^=公司名]';
-        let companyNames = $(companySelector).text().trim().split(/\s+/);
-        changeCompanyNameBg(companySelector, companyNames)
+        changeCompanyNameBg('a[title^=公司名]');
+        document.addEventListener('scroll', () => {
+            changeCompanyNameBg('a[title^=公司名]');
+        });
     } else if (url.match(jobPageRegex104) != null) {
-        // Because the company name element will be loaded first on the job vacancy page, but the text will not, so the text of the page title will be used instead.
-        let companySelector = 'a[data-gtm-head=公司名稱]';
-        window.setTimeout(() => {
-            let companyNames = [$('title').text().trim().split('｜')[1]];
-            changeCompanyNameBg(companySelector, companyNames)
-        }, 500);
+        changeCompanyNameBg('a[data-gtm-head=公司名稱]');
     } else if (url.match(companyPageRegex104) != null) {
-        // For the same reason as above
-        let companySelector = '.h1:first';
-        window.setTimeout(() => {
-            let companyNames = [$(companySelector).text().trim()];
-            changeCompanyNameBg(companySelector, companyNames)
-        }, 500);
+        changeCompanyNameBg('.h1');
     }
 });
 
-function changeCompanyNameBg(companySelector, companyNames) {
-    chrome.storage.local.get(companyNames, companyInfos => {
-        for (let i = 0; i < companyNames.length; i++) {
-            let companyName = companyNames[i];
-            if (companyInfos[companyName] != undefined) {
-                let rating = companyInfos[companyName].rating;
-                $(companySelector).eq(i).addClass('company-note-' + rating + '-star');
-            }
+function changeCompanyNameBg(selector) {
+    window.setTimeout(() => {
+        let companyDoms = document.querySelectorAll(selector);
+        for (let i = 0; i < companyDoms.length; i++) {
+            let companyName = companyDoms[i].innerText.trim();
+            chrome.storage.local.get(companyName, res => {
+                if (res[companyName] != undefined) {
+                    let rating = res[companyName].rating;
+                    companyDoms[i].classList.add('company-note-' + rating + '-star');
+                }
+            })
         }
-    });
+    }, 500) // some element load first, but its text load later, so we wait
 }
