@@ -31,12 +31,13 @@
             "matches": [
                 "https://www.104.com.tw/jobs/search/*",
                 "https://www.104.com.tw/company/*",
-                "https://www.104.com.tw/job/*"
+                "https://www.104.com.tw/job/*",
+                "https://www.104.com.tw/*"
             ],
             "exclude_matches": [],
             "js": [
-                "content.js",
-                "thirdParty/jquery.min-3.5.1.js"
+                "thirdParty/jquery.min-3.5.1.js",
+                "content.js"
             ],
             "css": [
                 "css/content.css"
@@ -49,7 +50,8 @@
         "declarativeContent",
         "https://www.104.com.tw/jobs/search/*",
         "https://www.104.com.tw/company/*",
-        "https://www.104.com.tw/job/*"
+        "https://www.104.com.tw/job/*",
+        "https://www.104.com.tw/*"
     ],
     "options_page": "options.html"
 }
