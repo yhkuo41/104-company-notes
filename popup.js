@@ -9,15 +9,19 @@ $(document).ready(() => {
 
     if (cp != null || jp != null) {
       if (cp != null) {
-        chrome.tabs.sendMessage(tabs[0].id, { todo: 'getCompanyInfo', selector: '.h1:first' }, fillInPopup)
+        chrome.tabs.sendMessage(tabs[0].id, { todo: 'getCompanyInfo', selector: '.h1:first' }, fillInPopup);
       } else if (jp != null) {
-        chrome.tabs.sendMessage(tabs[0].id, { todo: 'getCompanyInfo', selector: 'a[data-gtm-head=公司名稱]' }, fillInPopup)
+        chrome.tabs.sendMessage(tabs[0].id, { todo: 'getCompanyInfo', selector: 'a[data-gtm-head=公司名稱]' }, fillInPopup);
+        // in job page, but we need companyURL
+        chrome.tabs.sendMessage(tabs[0].id, { todo: 'getCompanyURL', selector: 'a[data-gtm-head=公司名稱]' }, (companyURL) => {
+          url = companyURL;
+        });
       }
       function fillInPopup(res) {
         let companyName = Object.keys(res)[0];
         let companyInfo = res[companyName];
         $('#companyName').val(companyName);
-        $('#url').val(url);
+        $('#companyURL').val(url);
 
         if (companyInfo != undefined) {
           let rating = 6 - companyInfo.rating;
@@ -28,16 +32,16 @@ $(document).ready(() => {
     } else {
       // not in company or job page, disabled UI
       $('input, textarea, button').attr('disabled', true);
-      $('button[type="submit"]').text('請在公司或工作頁面新增／修改Note');
+      $('button[type="submit"]').text('請在公司或職缺頁面新增／修改Note');
       $('button[type="submit"]').removeClass('btn-primary');
       $('button[type="submit"]').addClass('btn-warning');
     }
   });
 
   // add or update note
-  $('#addOrUpdateNote').submit(() => {
+  $('#noteForm').submit(() => {
     let companyName = $('#companyName').val().trim();
-    let url = $('#url').val();
+    let companyURL = $('#companyURL').val();
     let note = $('#note').val();
     let rating = $('input[name="star"]:checked').val();
 
@@ -48,7 +52,7 @@ $(document).ready(() => {
 
     rating = -rating + 6; // because the rating bar is {flex-direction: row-reverse;}
     let companyInfo = {
-      "url": url,
+      "companyURL": companyURL,
       "note": note,
       "rating": rating
     };

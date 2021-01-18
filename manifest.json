@@ -32,6 +32,7 @@
                 "https://www.104.com.tw/jobs/search/*",
                 "https://www.104.com.tw/company/*",
                 "https://www.104.com.tw/job/*",
+                "https://pda.104.com.tw/*",
                 "https://www.104.com.tw/*"
             ],
             "exclude_matches": [],
@@ -51,6 +52,7 @@
         "https://www.104.com.tw/jobs/search/*",
         "https://www.104.com.tw/company/*",
         "https://www.104.com.tw/job/*",
+        "https://pda.104.com.tw/*",
         "https://www.104.com.tw/*"
     ],
     "options_page": "options.html"

@@ -11,6 +11,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         });
         // must return true to avoid 'The message port closed before a response was received.'
         return true;
+    } else if (request.todo === 'getCompanyURL') {
+        sendResponse($(request.selector).attr('href'));
+        return true;
     }
 });
 
@@ -20,6 +23,7 @@ $(document).ready(() => {
     const searchPageRegex104 = new RegExp('https://www.104.com.tw/jobs/search/', 'i');
     const jobPageRegex104 = new RegExp('https://www.104.com.tw/job/', 'i');
     const companyPageRegex104 = new RegExp('https://www.104.com.tw/company/', 'i');
+    const memberCenterRegex104 = new RegExp('https://pda.104.com.tw/', 'i');
 
     if (url.match(searchPageRegex104) != null) {
         changeCompanyNameBg('a[title^=公司名]');
@@ -30,6 +34,11 @@ $(document).ready(() => {
         changeCompanyNameBg('a[data-gtm-head=公司名稱]');
     } else if (url.match(companyPageRegex104) != null) {
         changeCompanyNameBg('.h1');
+    } else if (url.match(memberCenterRegex104) != null) {
+        changeCompanyNameBg('.info-company__text');
+        document.addEventListener('scroll', () => {
+            changeCompanyNameBg('.info-company__text');
+        });
     }
 });
 
