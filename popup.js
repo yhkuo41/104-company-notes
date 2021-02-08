@@ -7,28 +7,14 @@ $(document).ready(() => {
     let cp = url.match(companyPageRegex104);
     let jp = url.match(jobPageRegex104);
 
-    if (cp != null || jp != null) {
-      if (cp != null) {
-        chrome.tabs.sendMessage(tabs[0].id, { todo: 'getCompanyInfo', selector: '.h1:first' }, fillInPopup);
-      } else if (jp != null) {
-        chrome.tabs.sendMessage(tabs[0].id, { todo: 'getCompanyInfo', selector: 'a[data-gtm-head=公司名稱]' }, fillInPopup);
-        // in job page, but we need companyURL
-        chrome.tabs.sendMessage(tabs[0].id, { todo: 'getCompanyURL', selector: 'a[data-gtm-head=公司名稱]' }, (companyURL) => {
-          url = companyURL;
-        });
-      }
-      function fillInPopup(res) {
-        let companyName = Object.keys(res)[0];
-        let companyInfo = res[companyName];
-        $('#companyName').val(companyName);
-        $('#companyURL').val(url);
-
-        if (companyInfo != undefined) {
-          let rating = 6 - companyInfo.rating;
-          $('#note').text(companyInfo.note);
-          $('#star' + rating).prop('checked', true);
-        }
-      }
+    if (cp) {
+      chrome.tabs.sendMessage(tabs[0].id, { todo: 'getCompanyInfo', selector: '.h1:first' }, fillInPopup);
+    } else if (jp) {
+      chrome.tabs.sendMessage(tabs[0].id, { todo: 'getCompanyInfo', selector: 'a[data-gtm-head=公司名稱]' }, fillInPopup);
+      // in job page, but we need companyURL
+      chrome.tabs.sendMessage(tabs[0].id, { todo: 'getCompanyURL', selector: 'a[data-gtm-head=公司名稱]' }, (companyURL) => {
+        url = companyURL;
+      });
     } else {
       // not in company or job page, disabled UI
       $('input, textarea, button').attr('disabled', true);
@@ -36,7 +22,22 @@ $(document).ready(() => {
       $('button[type="submit"]').removeClass('btn-primary');
       $('button[type="submit"]').addClass('btn-warning');
     }
+
+    function fillInPopup(res) {
+      let companyName = Object.keys(res)[0];
+      let companyInfo = res[companyName];
+      $('#companyName').val(companyName);
+      $('#companyURL').val(url);
+
+      if (companyInfo != undefined) {
+        let rating = 6 - companyInfo.rating;
+        $('#note').text(companyInfo.note);
+        $('#star' + rating).prop('checked', true);
+      }
+    }
   });
+
+
 
   // add or update note
   $('#noteForm').submit(() => {

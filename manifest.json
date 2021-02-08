@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "104 Company Notes",
     "version": "1.0",
-    "description": "A chrome extension that allows you to freely share a list of your personal reviews of companies on 104 Human Resources Bank, and it also changes the search results page based on your reviews.",
+    "description": "針對104人力銀行設計的chrome插件，可自訂對公司的評價並記錄成清單，插件會根據個人的評價幫公司名稱著色，除方便求職者個人記錄用之外，也可透過其他插件匯出評價清單和其他求職者分享。",
     "author": "Y.H. Kuo (Sakieye)",
     "icons": {
         "16": "images/104-company-notes16.png",
@@ -54,6 +54,5 @@
         "https://www.104.com.tw/job/*",
         "https://pda.104.com.tw/*",
         "https://www.104.com.tw/*"
-    ],
-    "options_page": "options.html"
+    ]
 }

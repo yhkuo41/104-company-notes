@@ -20,24 +20,18 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 // Find rating and change background color of company name
 $(document).ready(() => {
     let url = location.href;
-    const searchPageRegex104 = new RegExp('https://www.104.com.tw/jobs/search/', 'i');
-    const jobPageRegex104 = new RegExp('https://www.104.com.tw/job/', 'i');
     const companyPageRegex104 = new RegExp('https://www.104.com.tw/company/', 'i');
-    const memberCenterRegex104 = new RegExp('https://pda.104.com.tw/', 'i');
+    const otherPageRegex104 = new RegExp('https://www.104.com.tw/jobs/search/|https://www.104.com.tw/job/|https://pda.104.com.tw/', 'i');
+    const companyLinkSelector = "a[href*='www.104.com.tw/company/']";
+    let matchCompanyPage = url.match(companyPageRegex104);
+    let matchOtherPage = url.match(otherPageRegex104)
 
-    if (url.match(searchPageRegex104) != null) {
-        changeCompanyNameBg('a[title^=公司名]');
-        document.addEventListener('scroll', () => {
-            changeCompanyNameBg('a[title^=公司名]');
-        });
-    } else if (url.match(jobPageRegex104) != null) {
-        changeCompanyNameBg('a[data-gtm-head=公司名稱]');
-    } else if (url.match(companyPageRegex104) != null) {
+    if (matchCompanyPage) {
         changeCompanyNameBg('.h1');
-    } else if (url.match(memberCenterRegex104) != null) {
-        changeCompanyNameBg('.info-company__text');
+    } else if (matchOtherPage) {
+        changeCompanyNameBg(companyLinkSelector);
         document.addEventListener('scroll', () => {
-            changeCompanyNameBg('.info-company__text');
+            changeCompanyNameBg(companyLinkSelector);
         });
     }
 });
