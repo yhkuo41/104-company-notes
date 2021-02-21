@@ -11,7 +11,7 @@
         "128": "images/104-company-notes128.png"
     },
     "page_action": {
-        "default_title": "104 Shareable Filter",
+        "default_title": "104 Company Notes",
         "default_popup": "popup.html",
         "default_icon": {
             "16": "images/104-company-notes16.png",
@@ -48,7 +48,6 @@
     "permissions": [
         "tabs",
         "storage",
-        "declarativeContent",
         "https://www.104.com.tw/jobs/search/*",
         "https://www.104.com.tw/company/*",
         "https://www.104.com.tw/job/*",

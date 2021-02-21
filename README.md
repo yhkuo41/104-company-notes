@@ -3,7 +3,7 @@
 針對104人力銀行設計的chrome插件，可自訂對公司的評價並記錄成清單，插件會根據個人的評價幫公司名稱著色，除方便求職者個人記錄用之外，也可透過其他插件匯出評價清單和其他求職者分享。
 
 ## 安裝連結
-1. [點我]()安裝104 Company Notes
+1. [點我](https://chrome.google.com/webstore/detail/104-company-notes/fkpbbanojkgabinplpdoehncppjekdag?hl=zh-TW&authuser=5)安裝104 Company Notes
 2. [點我](https://chrome.google.com/webstore/detail/storage-area-explorer/ocfjjjjhkpapocigimmppepjgfdecjkb)安裝Storage Area Explorer(Note分享需安裝，若僅個人使用可不必安裝)
 
 ## Note使用
